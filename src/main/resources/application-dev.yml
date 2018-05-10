@@ -1,0 +1,22 @@
+server:
+    port: 9081
+    
+spring:
+  datasource: 
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/nogi
+    username: root
+    password: 569767
+    
+  jpa: 
+    hibernate:
+      ddl-auto: none
+      
+      
+logging:
+  pattern:
+    console: "%d - %msg%n"
+    file: "%d - %msg%n"
+  
+  path: F:\nogimono
+  file: F:\nogimono\err.log

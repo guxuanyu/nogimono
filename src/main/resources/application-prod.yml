@@ -1,0 +1,22 @@
+server:
+    port: 9080
+    
+spring:
+  datasource: 
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/nogimono
+    username: c0nnector
+    password: nogimono.tk
+    
+  jpa: 
+    hibernate:
+      ddl-auto: none
+      
+      
+logging:
+  pattern:
+    console: "%d - %msg%n"
+    file: "%d - %msg%n"
+  
+  path: /home/ubuntu/aaa
+  file: /home/ubuntu/aaa/log.txt
