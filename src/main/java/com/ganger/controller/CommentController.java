@@ -1,6 +1,8 @@
 package com.ganger.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,5 +54,10 @@ public class CommentController {
 	@PostMapping("/floor")
 	public ResponseVo getFloor(FloorForm floorForm) {
 		return ResponseUtil.success(commentService.getFloorAndChile(floorForm));
+	}
+	
+	@GetMapping("/{fid}/{page}/{size}")
+	public ResponseVo test(@PathVariable("fid")Integer fid,@PathVariable("page")Integer page,@PathVariable("size")Integer size) {
+		return ResponseUtil.success(commentService.getComment(fid,page,size));
 	}
 }

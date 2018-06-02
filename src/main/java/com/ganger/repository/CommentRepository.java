@@ -13,9 +13,12 @@ public interface CommentRepository extends JpaRepository<Comment, Integer>{
 	
 	Page<Comment> findByFid(Integer fid,Pageable pageable);
 	
+	Page<Comment> findByFidAndFatherIsNull(Integer fid,Pageable pageable);
+	
 	Page<Comment> findByFather(Integer father,Pageable pageable);
 	
 	Page<Comment> findByFidAndFather(Integer fid,Integer father,Pageable pageable);
+	
 	
 	Comment findByCid(Integer cid);
 	
@@ -23,4 +26,6 @@ public interface CommentRepository extends JpaRepository<Comment, Integer>{
 	//Page<Comment> findByFidOrderByPost(Integer fid,Pageable pageable);
 	
 	//Page<Comment> findByFatherOrderByPost(Integer fid,Pageable pageable);
+	
+	List<Comment> findByFatherIn(List<Integer> cid);
 }

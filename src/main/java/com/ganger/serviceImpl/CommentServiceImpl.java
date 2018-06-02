@@ -9,19 +9,31 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import com.ganger.VO.CommentChildVO;
+import com.ganger.VO.CommentHolderVO;
 import com.ganger.VO.CommentUserVO;
 import com.ganger.VO.CommentVO;
+import com.ganger.VO.CommentVO2;
 import com.ganger.VO.FloorVO;
 import com.ganger.VO.UnreadReplyVO;
 import com.ganger.entity.Comment;
@@ -32,6 +44,7 @@ import com.ganger.form.FloorForm;
 import com.ganger.form.IdAndTokenForm;
 import com.ganger.form.ReadedForm;
 import com.ganger.repository.CommentRepository;
+import com.ganger.repository.CommentSpecRepo;
 import com.ganger.service.CommentService;
 import com.ganger.utils.CheckUserUtil;
 import com.ganger.utils.TimeUtil;
@@ -42,6 +55,9 @@ public class CommentServiceImpl implements CommentService{
 
 	@Autowired
 	CommentRepository commentRepository;
+	
+//	@Autowired
+//	CommentSpecRepo commentSpecRepo;
 	
 	@Autowired
 	CheckUserUtil checkUserUtil;
@@ -111,6 +127,53 @@ public class CommentServiceImpl implements CommentService{
 		comment.setPost(new Timestamp(System.currentTimeMillis()));
 		comment.setStatus(0);
 		commentRepository.save(comment);
+	}
+	
+	
+	@Override
+	@Transactional
+	public CommentHolderVO<List<CommentVO2>> getComment(Integer fid,Integer page,Integer size) {
+	
+		Page<Comment> fathers=commentRepository.findByFidAndFatherIsNull(fid,PageRequest.of(page, size,Sort.by(Direction.DESC,"cid")));
+		
+		List<Integer> cids=new ArrayList<Integer>(fathers.getSize());
+		List<CommentVO2> res=new ArrayList<>();
+		for (Comment comment : fathers) {
+			res.add(new CommentVO2(comment));
+			cids.add(comment.getCid());
+		}
+		//System.out.println(cids);
+		List<Comment> childs=commentRepository.findByFatherIn(cids);
+		
+		Map<Integer, List<CommentChildVO>> sonMap=new HashMap<>();
+		
+		for(Comment child:childs) {
+			CommentChildVO childVO=new CommentChildVO(child);
+			if(!sonMap.containsKey(child.getFather())) {
+				List<CommentChildVO> childList=new ArrayList<CommentChildVO>();
+				childList.add(childVO);
+				sonMap.put(child.getFather(), childList);
+			}
+			else {
+				sonMap.get(child.getFather()).add(childVO);
+			}
+		}
+		for (CommentVO2 cVo : res) {
+			if(sonMap.containsKey(cVo.getCid())) {
+				List<CommentChildVO> childVOs=sonMap.get(cVo.getCid());
+				List<CommentChildVO> sub;
+				if(childVOs.size()>5) {
+					cVo.setMore(1);
+					sub=childVOs.subList(0, 5);
+				}
+				else {
+					sub=childVOs;
+					cVo.setMore(0);
+				}
+				cVo.setChildVOs(sub);
+			}
+		}
+		return new CommentHolderVO<List<CommentVO2>>(fathers.hasNext()?1:0,res);
 	}
 	
 	@Override

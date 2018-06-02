@@ -2,7 +2,9 @@ package com.ganger.service;
 
 import java.util.List;
 
+import com.ganger.VO.CommentHolderVO;
 import com.ganger.VO.CommentVO;
+import com.ganger.VO.CommentVO2;
 import com.ganger.VO.FloorVO;
 import com.ganger.VO.UnreadReplyVO;
 import com.ganger.entity.Comment;
@@ -26,4 +28,6 @@ public interface CommentService {
 	void deleteComment(ReadedForm readedForm);
 	
 	FloorVO getFloorAndChile(FloorForm floorForm);
+	
+	CommentHolderVO<List<CommentVO2>> getComment(Integer fid,Integer page,Integer size);
 }
