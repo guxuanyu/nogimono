@@ -1,17 +1,23 @@
 package com.ganger.form;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value="添加评论表单")
 public class AddCommentForm {
 
 	private Integer uid;
-	
+	@ApiModelProperty(value = "文章id")
 	private Integer fid;
 	
 	private String message;
-	
+
+	@ApiModelProperty(value = "主评论id")
 	private Integer father;
 
+	@ApiModelProperty(value = "副评论id")
 	private Integer touid;
-	
+
 	private String token;
 	
 	public AddCommentForm() {

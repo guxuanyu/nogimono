@@ -3,6 +3,9 @@ package com.ganger.VO;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.ganger.entity.User;
 
+/**
+ * 评论人对象
+ */
 @JsonTypeName("user")
 public class CommentUserVO {
 

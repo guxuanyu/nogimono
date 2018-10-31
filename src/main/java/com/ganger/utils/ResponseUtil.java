@@ -3,6 +3,9 @@ package com.ganger.utils;
 import com.ganger.VO.ResponseVo;
 import com.ganger.enums.CodeEnum;
 
+/**
+ * 返回体
+ */
 public class ResponseUtil {
 
 	public static ResponseVo success(Object data) {

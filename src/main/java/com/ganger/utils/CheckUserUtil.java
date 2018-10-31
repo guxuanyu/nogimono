@@ -9,6 +9,9 @@ import com.ganger.entity.User;
 import com.ganger.exception.MyException;
 import com.ganger.repository.UserRepository;
 
+/**
+ * 用户验证
+ */
 @Component
 public class CheckUserUtil {
 

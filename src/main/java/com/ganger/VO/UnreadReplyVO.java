@@ -1,17 +1,38 @@
 package com.ganger.VO;
 
+/**
+ * 未读回复
+ */
 public class UnreadReplyVO {
 
+	/**
+	 * 消息来源人
+	 */
 	private CommentUserVO fromuser;
-	
+
+	/**
+	 * 消息id
+	 */
 	private Integer cid;
-	
+
+	/**
+	 *
+	 */
 	private Integer fid;
-	
+
+	/**
+	 * 时间
+	 */
 	private String time;
-	
+
+	/**
+	 * 消息主体
+	 */
 	private String message;
 
+	/**
+	 * 回复的消息的id
+	 */
 	private Integer fathercid;
 	
 	public UnreadReplyVO() {

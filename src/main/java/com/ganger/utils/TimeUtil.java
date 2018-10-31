@@ -3,6 +3,9 @@ package com.ganger.utils;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
+/**
+ * 时间格式化工具
+ */
 public class TimeUtil {
 	
 	public static String showTime(Timestamp ctime) {

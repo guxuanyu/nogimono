@@ -3,18 +3,34 @@ package com.ganger.VO;
 import com.ganger.entity.Comment;
 import com.ganger.utils.TimeUtil;
 
+/**
+ * 子评论
+ */
 public class CommentChildVO {
-	
+
+	/**
+	 * 评论人
+	 */
 	private CommentUserVO user;
-	
+
+	/**
+	 * 被回复用户
+	 */
 	private CommentUserVO touser;
-	
+
+	/**
+	 * 评论id
+	 */
 	private Integer cid;
 	
 	private String time;
-	
+	/**
+	 * 评论楼层
+	 */
 	private Integer floor;
-	
+	/**
+	 * 评论主体
+	 */
 	private String msg;
 
 	public CommentChildVO() {

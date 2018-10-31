@@ -4,18 +4,39 @@ import com.ganger.entity.User;
 
 public class UserVO {
 
+	/**
+	 *  邮箱
+	 */
 	private String email;
-	
+
+    /**
+     * 电话
+     */
 	private String phone;
-	
+
+    /**
+     * 昵称
+     */
 	private String nickname;
-	
+
+    /**
+     * 简介
+     */
 	private String introduction;
-	
+
+    /**
+     * 状态
+     */
 	private Integer status;
 
+    /**
+     * 性别
+     */
 	private Integer sex;
-	
+
+    /**
+     * 头像
+     */
 	private String avatar;
 	
 	public UserVO() {

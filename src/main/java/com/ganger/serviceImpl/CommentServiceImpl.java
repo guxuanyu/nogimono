@@ -76,20 +76,25 @@ public class CommentServiceImpl implements CommentService{
 		comment.setIsreply(0);
 		
 		Integer floor=0;
+		// 非嵌套评论
 		if(addCommentForm.getFather()==null) {
 			Page<Comment> last=commentRepository.findByFidAndFather(addCommentForm.getFid(),null,
 					PageRequest.of(0, 1,Sort.by(Direction.DESC,"cid")));
+			// 有评论的情况下获得评论楼层id，没有取0
 			floor=CollectionUtils.isEmpty(last.getContent())?0:last.getContent().get(0).getFloor();
 			
 		}
 		else {
+			// 嵌套评论
 			Page<Comment> last=commentRepository.findByFather(addCommentForm.getFather(), 
 					PageRequest.of(0, 1,Sort.by(Direction.DESC,"cid")));
 			Optional<Comment> fatherOptional=commentRepository.findById(addCommentForm.getFather());
 			String noFloorErr="此楼已删除，无法评论";
 			Comment father=fatherOptional.orElseThrow(()->new MyException(noFloorErr,"father_cid:["+addCommentForm.getFather()+"] "+noFloorErr));
-			
-			
+
+			/**
+			 * 判断是否都是当前文章下的评论
+			 */
 			if(father.getFid()-addCommentForm.getFid()!=0) {
 				String err="此评论不属于此文章";
 				throw new MyException(err, 

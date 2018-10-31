@@ -1,14 +1,20 @@
 package com.ganger.form;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+@ApiModel(value="用户修改表单")
 public class ChangeUserSetForm {
 
 	@NotNull(message="id不能为空")
+	@ApiModelProperty(required = true)
 	private Integer id;
 	
 	@NotEmpty(message="token不能为空")
+	@ApiModelProperty(required = true)
 	private String token;
 	
 	private String nickname;
