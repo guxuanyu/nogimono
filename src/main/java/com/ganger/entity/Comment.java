@@ -15,13 +15,24 @@ public class Comment {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer cid;
-	
+	/**
+	 * 文章id
+	 */
 	private Integer fid;
-	
+
+	/**
+	 * 发布时间
+	 */
 	private Timestamp post;
-	
+
+	/**
+	 * 关联上级评论id
+	 */
 	private Integer father;
-	
+
+	/**
+	 * 评论楼层
+	 */
 	private Integer floor;
 	
 	@OneToOne(targetEntity=User.class)
@@ -35,9 +46,13 @@ public class Comment {
 	@OneToOne(targetEntity=User.class)
 	@JoinColumn(name="touid")
 	private User toUser;
-	
+	/**
+	 * 已读标志位
+	 */
 	private Integer readed;
-	
+	/**
+	 * 是否为回复评论
+	 */
 	private Integer isreply;
 	
 	public User getUser() {

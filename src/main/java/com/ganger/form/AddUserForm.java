@@ -1,13 +1,19 @@
 package com.ganger.form;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.validation.constraints.NotEmpty;
 
+@ApiModel(value="添加用户表单")
 public class AddUserForm {
 
 	@NotEmpty(message="密码不能为空")
+	@ApiModelProperty(required = true, value = "密码")
 	private String password;
 
 	@NotEmpty(message="昵称不能为空")
+	@ApiModelProperty(required = true,  value = "昵称")
 	private String nickname;
 	
 	public AddUserForm() {

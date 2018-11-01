@@ -1,6 +1,9 @@
 package com.ganger.utils;
 import java.security.MessageDigest;
 
+/**
+ * MD5 工具类
+ */
 public class MD5Util {
 	
 	//32位大写MD5

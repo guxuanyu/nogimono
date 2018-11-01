@@ -1,7 +1,12 @@
 package com.ganger.form;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.validation.constraints.NotEmpty;
 
+
+@ApiModel(value="登录表单")
 public class LoginForm {
 
 	private String phone;
@@ -11,6 +16,7 @@ public class LoginForm {
 	private String nickname;
 	
 	@NotEmpty(message="密码必填")
+	@ApiModelProperty(required = true)
 	private String password;
 
 	public LoginForm() {

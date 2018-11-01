@@ -9,17 +9,35 @@ import com.ganger.utils.TimeUtil;
 
 public class CommentVO {
 
+	/**
+	 * 评论id
+	 */
 	private Integer cid;
-	
+
+	/**
+	 * 评论人
+	 */
 	@JsonProperty("user")
 	private CommentUserVO commentUserVO;
-	
+
+	/**
+	 * 时间
+	 */
 	private String time;
-	
+
+	/**
+	 * 楼层id
+	 */
 	private Integer floor;
-	
+
+	/**
+	 * 评论主体
+	 */
 	private String msg;
-	
+
+	/**
+	 * 子评论
+	 */
 	@JsonProperty("child")
 	private List<CommentChildVO> childVOs=new ArrayList<CommentChildVO>();
 

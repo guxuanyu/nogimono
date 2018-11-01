@@ -2,9 +2,17 @@ package com.ganger.utils;
 
 import com.ganger.exception.MyException;
 
+/**
+ * 文本工具
+ */
 public class TextUtil {
 
-	public static boolean isNull(String s){
+    /**
+     * 文本非空判断
+     * @param s
+     * @return
+     */
+    public static boolean isNull(String s){
 		if(s==null) {
 			return true;
 		}
@@ -13,7 +21,12 @@ public class TextUtil {
 		}
 		return false;
 	}
-	
+
+    /**
+     * 文本字数统计
+     * @param s
+     * @return
+     */
 	public static int getWordCount(String s)
 	{  
         int length = 0;  
@@ -29,7 +42,11 @@ public class TextUtil {
         return length;  
 
     }
-	
+
+    /**
+     * 昵称长度检查
+     * @param s
+     */
 	public static void nickNameLengthCheck(String s)  
     {  
         int length = 0;  

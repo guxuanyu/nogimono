@@ -1,9 +1,18 @@
 package com.ganger.VO;
 
+/**
+ * 评论楼层
+ */
 public class FloorVO {
 
+	/**
+	 * 文章id
+	 */
 	private Integer fid;
-	
+
+	/**
+	 * 评论
+	 */
 	private CommentVO floor;
 
 	public FloorVO() {

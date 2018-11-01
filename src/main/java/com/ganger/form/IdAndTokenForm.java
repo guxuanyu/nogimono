@@ -1,7 +1,12 @@
 package com.ganger.form;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value="获取用户表单")
 public class IdAndTokenForm {
 
+	@ApiModelProperty(value = "用户id")
 	private Integer uid;
 	
 	private String token;

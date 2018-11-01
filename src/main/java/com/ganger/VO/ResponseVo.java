@@ -1,5 +1,9 @@
 package com.ganger.VO;
 
+/**
+ * 返回体
+ * @param <T>
+ */
 public class ResponseVo<T> {
 	private Integer code;
 	
